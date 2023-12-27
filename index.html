@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Art Quiz</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: black; /* Black background color */
+            color: #ecf0f1; /* Light grey text color */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        #question-container {
+            padding: 20px;
+            border: 2px solid #e74c3c; /* Red border color */
+            border-radius: 10px; /* Rounded corners */
+            background-color: #2c3e50; /* Dark grey background color */
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #e74c3c; /* Red color for headers */
+            margin-bottom: 20px;
+        }
+
+        #countdown {
+            margin-top: 10px;
+        }
+
+        .answer {
+            color: yellow; /* Yellow color for answers */
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const questionContainer = document.createElement("div");
+        const countdownElement = document.createElement("div");
+
+        document.body.appendChild(questionContainer);
+
+        const allGenQuestions = [
+            
+            
+                 pergunta: "Qual é a capital de Portugal?",
+    resposta: "Lisboa"
+  },
+  {
+    pergunta: "Quem foi o primeiro rei de Portugal?",
+    resposta: "D. Afonso Henriques"
+  },
+  {
+    pergunta: "Quantos continentes existem?",
+    resposta: "Sete"
+  },
+  {
+    pergunta: "Quem escreveu 'Os Lusíadas'?",
+    resposta: "Luís de Camões"
+  },
+  {
+    pergunta: "Qual é a moeda oficial de Portugal?",
+    resposta: "Euro"
+  },
+  {
+    pergunta: "Em que ano ocorreu a Revolução dos Cravos em Portugal?",
+    resposta: "1974"
+  },
+  {
+    pergunta: "Quem é o autor de 'O Principezinho'?",
+    resposta: "Antoine de Saint-Exupéry"
+  },
+  {
+    pergunta: "Qual é a montanha mais alta do mundo?",
+    resposta: "Monte Everest"
+  },
+  {
+    pergunta: "Quem foi o primeiro presidente dos Estados Unidos?",
+    resposta: "George Washington"
+  },
+  {
+    pergunta: "Quantos planetas fazem parte do nosso sistema solar?",
+    resposta: "Oito"
+  },
+  {
+    pergunta: "Quem pintou a Mona Lisa?",
+    resposta: "Leonardo da Vinci"
+  },
+  {
+    pergunta: "Qual é o maior rio do mundo?",
+    resposta: "Rio Amazonas"
+  },
+  {
+    pergunta: "Quem foi o primeiro homem a pisar na lua?",
+    resposta: "Neil Armstrong"
+  },
+  {
+    pergunta: "Em que ano começou a Primeira Guerra Mundial?",
+    resposta: "1914"
+  },
+  {
+    pergunta: "Qual é o país mais populoso do mundo?",
+    resposta: "China"
+  },
+  {
+    pergunta: "Quem foi o fundador da Microsoft?",
+    resposta: "Bill Gates"
+  },
+  {
+    pergunta: "Qual é o maior animal terrestre?",
+    resposta: "Elefante africano"
+  },
+  {
+    pergunta: "Quem foi o primeiro homem a inventar a lâmpada elétrica?",
+    resposta: "Thomas Edison"
+  },
+  {
+    pergunta: "Quantos ossos tem o corpo humano?",
+    resposta: "206"
+  },
+  {
+    pergunta: "Qual é a capital do Brasil?",
+    resposta: "Brasília"
+  },
+  {
+    pergunta: "Quem escreveu 'Dom Quixote'?",
+    resposta: "Miguel de Cervantes"
+  },
+  {
+    pergunta: "Qual é a maior cidade do mundo em população?",
+    resposta: "Tóquio"
+  },
+  {
+    pergunta: "Quem foi o físico teórico responsável pela Teoria da Relatividade?",
+    resposta: "Albert Einstein"
+  },
+  {
+    pergunta: "Em que ano ocorreu a independência do Brasil?",
+    resposta: "1822"
+  },
+  {
+    pergunta: "Qual é o país mais extenso do mundo em área territorial?",
+    resposta: "Rússia"
+  },
+  {
+    pergunta: "Quem é a autora da saga 'Harry Potter'?",
+    resposta: "J.K. Rowling"
+  },
+  {
+    pergunta: "Quantos anos tem um século?",
+    resposta: "Cem anos"
+  },
+  {
+    pergunta: "Quem foi o primeiro imperador romano?",
+    resposta: "César Augusto"
+  },
+  {
+    pergunta: "Qual é a maior cordilheira do mundo?",
+    resposta: "Cordilheira dos Andes"
+  },
+  {
+    pergunta: "Quem foi o autor de 'Romeu e Julieta'?",
+    resposta: "William Shakespeare"
+  },
+  {
+    pergunta: "Qual é o menor país do mundo em área territorial?",
+    resposta: "Vaticano"
+  },
+  {
+    pergunta: "Quem foi o primeiro presidente da República Portuguesa?",
+    resposta: "Manuel de Arriaga"
+  },
+  {
+    pergunta: "Qual é a camada mais externa da atmosfera terrestre?",
+    resposta: "Exosfera"
+  },
+  {
+    pergunta: "Quem foi o fundador da Apple Inc.?",
+    resposta: "Steve Jobs"
+  },
+  {
+    pergunta: "Qual é o segundo planeta do sistema solar?",
+    resposta: "Vênus"
+  },
+  {
+    pergunta: "Quem foi o líder sul-africano que lutou contra o apartheid?",
+    resposta: "Nelson Mandela"
+  },
+  {
+    pergunta: "Quantos lados tem um triângulo?",
+    resposta: "Três"
+  },
+  {
+    pergunta: "Quem foi o primeiro astronauta a dar um passeio espacial?",
+    resposta: "Alexei Leonov"
+  },
+  {
+    pergunta: "Em que ano terminou a Segunda Guerra Mundial?",
+    resposta: "1945"
+  },
+  {
+    pergunta: "Qual é o maior deserto do mundo?",
+    resposta: "Antártida"
+  },
+  {
+    pergunta: "Quem é a autora de 'Orgulho e Preconceito'?",
+    resposta: "Jane Austen"
+  },
+  {
+    pergunta: "Qual é o país conhecido como 'Terra do Sol Nascente'?",
+    resposta: "Japão"
+  },
+  {
+    pergunta: "Quem foi o inventor do telefone?",
+    resposta: "Alexander Graham Bell"
+  },
+  {
+    pergunta: "Quantos elementos químicos existem na tabela periódica?",
+    resposta: "118"
+  },
+  {
+    pergunta: "Qual é o maior oceano do mundo?",
+    resposta: "Oceano Pacífico"
+  },
+  {
+    pergunta: "Quem foi o líder da Revolução Cubana?",
+    resposta: "Fidel Castro"
+  },
+  {
+    pergunta: "Quantos estados compõem os Estados Unidos da América?",
+    resposta: "50"
+  },
+  {
+    pergunta: "Quem foi o pintor impressionista francês?",
+    resposta: "Claude Monet"
+  },
+  {
+    pergunta: "Qual é o maior mamífero marinho?",
+    resposta: "Baleia Azul"
+  },
+  {
+    pergunta: "Quem foi o primeiro homem a orbitar a Terra?",
+    resposta: "Yuri Gagarin"
+  },
+  {
+    pergunta: "Em que ano foi assinada a Declaração de Independência dos Estados Unidos?",
+    resposta: "1776"
+  },
+  {
+    pergunta: "Qual é a capital do Canadá?",
+    resposta: "Ottawa"
+  },
+  {
+    pergunta: "Quem é conhecido como o 'Pai da Computação'?",
+    resposta: "Alan Turing"
+  },
+  {
+    pergunta: "Qual é o menor número primo?",
+    resposta: "Dois"
+  },
+  {
+    pergunta: "Quem foi o primeiro imperador do Brasil?",
+    resposta: "D. Pedro I"
+  },
+  {
+    pergunta: "Qual é a dança tradicional do folclore português?",
+    resposta: "Fado"
+  },
+  {
+    pergunta: "Quem foi o autor da teoria da evolução das espécies?",
+    resposta: "Charles Darwin"
+  },
+  {
+    pergunta: "Qual é a cordilheira mais longa do mundo?",
+    resposta: "Cordilheira dos Andes"
+  },
+  {
+    pergunta: "Quem foi o líder pacifista que lutou pela independência da Índia?",
+    resposta: "Mahatma Gandhi"
+  },
+  {
+    pergunta: "Quantos anos tem um milênio?",
+    resposta: "Mil anos"
+  },
+  {
+    pergunta: "Quem foi o autor de '1984'?",
+    resposta: "George Orwell"
+  },
+  {
+    pergunta: "Qual é o metal líquido à temperatura ambiente?",
+    resposta: "Mercúrio"
+  },
+  {
+    pergunta: "Quem foi o primeiro astronauta a pisar na Lua?",
+    resposta: "Neil Armstrong"
+  },
+  {
+    pergunta: "Qual é o rio mais extenso do mundo?",
+    resposta: "Rio Amazonas"
+  },
+  {
+    pergunta: "Quem foi o inventor da lâmpada elétrica?",
+    resposta: "Thomas Edison"
+  },
+  {
+    pergunta: "Quantos anos tem um bicentenário?",
+    resposta: "Duzentos anos"
+  },
+  {
+    pergunta: "Quem foi o primeiro presidente dos Estados Unidos?",
+    resposta: "George Washington"
+  },
+  {
+    pergunta: "Qual é a capital da Rússia?",
+    resposta: "Moscou"
+  },
+  {
+    pergunta: "Quem foi o autor de 'A Divina Comédia'?",
+    resposta: "Dante Alighieri"
+  },
+  {
+    pergunta: "Qual é a ilha mais populosa do mundo?",
+    resposta: "Java"
+  },
+  {
+    pergunta: "Quem foi o primeiro homem a voar?",
+    resposta: "Irmãos Wright"
+  },
+  {
+    pergunta: "Em que ano foi assinada a Magna Carta na Inglaterra?",
+    resposta: "1215"
+  },
+  {
+    pergunta: "Qual é o país mais antigo do mundo?",
+    resposta: "Irã"
+  },
+  {
+    pergunta: "Quem foi o primeiro rei de Inglaterra?",
+    resposta: "Egbert"
+  },
+  {
+    pergunta: "Qual é o maior deserto do mundo?",
+    resposta: "Antártida"
+  },
+  {
+    pergunta: "Quem foi o primeiro homem a pisar na Antártida?",
+    resposta: "Fabian Gottlieb von Bellingshausen"
+  },
+  {
+    pergunta: "Qual é o número atômico do hidrogênio?",
+    resposta: "1"
+  },
+  {
+    pergunta: "Quem foi o autor da teoria da relatividade restrita?",
+    resposta: "Albert Einstein"
+  },
+  {
+    pergunta: "Qual é a capital do Japão?",
+    resposta: "Tóquio"
+  },
+  {
+    pergunta: "Quem foi o presidente do Brasil durante a Proclamação da República?",
+    resposta: "Marechal Deodoro da Fonseca"
+  },
+  {
+    pergunta: "Qual é o maior mamífero terrestre?",
+    resposta: "Elefante africano"
+  },
+  {
+    pergunta: "Quem foi o primeiro homem a atingir o Polo Sul?",
+    resposta: "Roald Amundsen"
+  },
+  {
+    pergunta: "Em que ano foi fundada a Organização das Nações Unidas (ONU)?",
+    resposta: "1945"
+  },
+  {
+    pergunta: "Qual é o nome do telescópio espacial lançado pela NASA em 1990?",
+    resposta: "Hubble"
+  },
+  {
+    pergunta: "Quem foi o primeiro presidente da República do Brasil?",
+    resposta: "Marechal Deodoro da Fonseca"
+  },
+  {
+    pergunta: "Qual é o ponto mais alto da Terra?",
+    resposta: "Monte Everest"
+  },
+  {
+    pergunta: "Quem foi o autor de 'O Processo'?",
+    resposta: "Franz Kafka"
+  },
+  {
+    pergunta: "Qual é o maior órgão do corpo humano?",
+    resposta: "Pele"
+  },
+  {
+    pergunta: "Quem foi o líder militar e político da Revolução Cubana?",
+    resposta: "Fidel Castro"
+  },
+  {
+    pergunta: "Quantos planetas do sistema solar têm anéis?",
+    resposta: "Quatro"
+  },
+  {
+    pergunta: "Quem foi o fundador do cristianismo?",
+    resposta: "Jesus Cristo"
+  },
+  {
+    pergunta: "Qual é o país mais populoso da África?",
+    resposta: "Nigéria"
+  },
+  {
+    pergunta: "Quem foi o autor de 'Odisseia'?",
+    resposta: "Homero"
+  },
+  {
+    pergunta: "Qual é o maior animal terrestre?",
+    resposta: "Elefante africano"
+  },
+  {
+    pergunta: "Quem foi o primeiro presidente da República Portuguesa?",
+    resposta: "Manuel de Arriaga"
+  },
+  {
+    pergunta: "Qual é o menor planeta do sistema solar?",
+    resposta: "Mercúrio"
+  },
+  {
+    pergunta: "Quem foi o cientista que formulou as leis do movimento e a lei da gravitação universal?",
+    resposta: "Isaac Newton"
+  },
+  {
+    pergunta: "Qual é o país mais extenso da América do Sul?",
+    resposta: "Brasil"
+  },
+  {
+    pergunta: "Quem foi o fundador da psicanálise?",
+    resposta: "Sigmund Freud"
+  },
+  {
+    pergunta: "Quantos elementos químicos existem na tabela periódica?",
+    resposta: "118"
+  },
+  {
+    pergunta: "Quem foi o líder do movimento pelos direitos civis nos Estados Unidos?",
+    resposta: "Martin Luther King Jr."
+  },
+  {
+    pergunta: "Qual é o país conhecido como 'Terra do Sol Nascente'?",
+    resposta: "Japão"
+  },
+
+
+        ];
+// Shuffle the questions array to ensure randomness
+        const shuffledQuestions = shuffleArray(allGenQuestions.slice());
+
+        // Variable to keep track of the questions shown
+        let questionsShown = 0;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function displayRandomQuestion() {
+            if (questionsShown < shuffledQuestions.length) {
+                const currentQuestion = shuffledQuestions[questionsShown++];
+
+                questionContainer.innerHTML = `<h1>${currentQuestion.pergunta}</h1>`;
+                questionContainer.appendChild(countdownElement);
+
+                // Show the countdown for 15 seconds
+                let secondsLeft = 15;
+                countdownElement.textContent = `Tempo restante: ${secondsLeft}s`;
+
+                const countdownInterval = setInterval(() => {
+                    secondsLeft--;
+
+                    if (secondsLeft >= 0) {
+                        countdownElement.textContent = `Tempo restante: ${secondsLeft}s`;
+                    } else {
+                        clearInterval(countdownInterval);
+
+                        // Show the answer for 10 seconds
+                        questionContainer.innerHTML += `<h1 class="answer">Resposta: ${currentQuestion.resposta}</h1>`;
+                        setTimeout(() => {
+                            // Show "Lança o dado outra vez e lê o código para novo desafio" for 10 seconds
+                            questionContainer.innerHTML = "<h1>Lança o dado outra vez e lê o código para novo desafio</h1>";
+                        }, 10000);
+                    }
+                }, 1000);
+            }
+        }
+
+        displayRandomQuestion(); // Initial call to start the quiz
+    });
+</script>
+
+</body>
+</html>
