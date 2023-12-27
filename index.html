@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Art Quiz</title>
+    <title>Random Gen Quiz</title>
     <style>
         body {
             margin: 0;
@@ -53,7 +53,8 @@
         const allGenQuestions = [
             
             
-                 pergunta: "Qual é a capital de Portugal?",
+ {
+     pergunta: "Qual é a capital de Portugal?",
     resposta: "Lisboa"
   },
   {
@@ -484,8 +485,8 @@
                 questionContainer.innerHTML = `<h1>${currentQuestion.pergunta}</h1>`;
                 questionContainer.appendChild(countdownElement);
 
-                // Show the countdown for 15 seconds
-                let secondsLeft = 15;
+                // Show the countdown for 10 seconds
+                let secondsLeft = 10;
                 countdownElement.textContent = `Tempo restante: ${secondsLeft}s`;
 
                 const countdownInterval = setInterval(() => {
@@ -496,7 +497,7 @@
                     } else {
                         clearInterval(countdownInterval);
 
-                        // Show the answer for 10 seconds
+                        // Show the answer for 6 seconds
                         questionContainer.innerHTML += `<h1 class="answer">Resposta: ${currentQuestion.resposta}</h1>`;
                         setTimeout(() => {
                             // Show "Lança o dado outra vez e lê o código para novo desafio" for 10 seconds
